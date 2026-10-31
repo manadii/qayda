@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qayda · Campus Lost &amp; Found</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--deep:#1b3554;--ink:#0b2140;--black:#000f22;--mid:#6e90cc;--mid2:#416a9c;--pale:#e3eefd;--glass:rgba(255,255,255,.5);--line:rgba(27,53,84,.16);--sub:#3d5a82;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--ink);font:400 16px/1.55 Inter,system-ui,sans-serif}
+.bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(to top right,#eef5fe 0%,#d3e2f8 32%,#a9c1ea 66%,#7f9fd4 100%)}
+.hero{position:relative;overflow:hidden;padding:54px 20px 26px}
+.hi{position:relative;max-width:820px;margin:0 auto}
+.orn{position:absolute;right:-120px;top:-70px;width:min(600px,100vw);fill:none;stroke:var(--deep);stroke-width:4;stroke-linecap:round;opacity:.2;transition:transform .3s ease-out;pointer-events:none}
+.orn .d{fill:var(--mid2);stroke:none}
+.rip{position:absolute;width:0;height:0;border:2px solid var(--deep);border-radius:50%;pointer-events:none;animation:rip 1s ease-out forwards}
+@keyframes rip{to{width:300px;height:300px;margin:-150px 0 0 -150px;opacity:0}}
+h1{font:800 clamp(64px,17vw,128px)/.92 Sora,Inter,sans-serif;letter-spacing:-.04em;margin:0;color:var(--deep)}
+.lead{font-size:19px;margin:16px 0 24px;max-width:26ch}.lead small{display:block;margin-top:8px;font-size:14px;color:var(--sub)}
+.srch input{width:100%;height:56px;border-radius:999px;border:1px solid rgba(27,53,84,.3);background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);padding:0 24px;font:500 16px Inter,sans-serif}
+.srch input::placeholder{color:#5c7599}
+.qa{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.band{height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M2 7c0-5 8-5 8 0s-6 4-6 1M26 7c0-5-8-5-8 0s6 4 6 1M10 7h8' fill='none' stroke='%231b3554' stroke-width='1.5' stroke-opacity='.5'/%3E%3C/svg%3E") repeat-x}
+body.mini .lead,body.mini .srch,body.mini .qa{display:none}
+body.mini h1{font-size:40px;letter-spacing:-.02em}body.mini .hero{padding:24px 20px 16px}body.mini .orn{width:300px;opacity:.12}
+main{max-width:820px;margin:0 auto;padding:22px 16px 120px}
+.enter{animation:up .4s ease-out}@keyframes up{from{opacity:0;transform:translateY(14px)}}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:4px;background:var(--deep);border-radius:999px;padding:6px;box-shadow:0 10px 30px rgba(0,15,34,.3)}
+nav button{border:0;background:none;color:#c5d6f3;padding:10px 16px;border-radius:999px;font:600 13px Inter,sans-serif;cursor:pointer;white-space:nowrap}
+nav button[aria-current=true]{background:var(--pale);color:var(--deep)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+.card{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:16px;margin:0 0 12px;transition:transform .15s ease-out,border-color .2s,background .2s}
+.card:hover{border-color:rgba(27,53,84,.4);background:rgba(255,255,255,.62)}
+.tilt:after{content:"";position:absolute;top:12px;right:12px;width:28px;height:28px;opacity:.3;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M4 24C4 12 14 4 24 6c-6 2-8 8-4 11s7 0 6-3' fill='none' stroke='%231b3554' stroke-width='1.6'/%3E%3C/svg%3E")}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 150px}
+input,select,textarea{width:100%;padding:11px 14px;border:1px solid rgba(27,53,84,.22);border-radius:14px;background:rgba(255,255,255,.75);color:var(--ink);font:inherit}
+input::placeholder,textarea::placeholder{color:#6a809f}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 5px}
+.btn{border:0;border-radius:999px;padding:10px 18px;font:600 14px Inter,sans-serif;cursor:pointer;background:var(--deep);color:var(--pale);transition:transform .12s}
+.btn:active{transform:scale(.96)}.btn.g{background:rgba(255,255,255,.45);border:1px solid rgba(27,53,84,.3);color:var(--deep)}.btn.k{background:var(--black);color:#fff}
+.btn.o{background:transparent;border:1.5px solid var(--deep);color:var(--deep)}.qa .btn{padding:12px 24px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 16px}
+.chip{flex:none;border:1px solid var(--line);background:rgba(255,255,255,.55);color:var(--deep);border-radius:999px;padding:7px 14px;font:500 14px Inter,sans-serif;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--deep);color:var(--pale);border-color:var(--deep)}.sep{flex:none;width:1px;background:var(--line);margin:4px 2px}
+.badge{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px;margin-right:8px}
+.lost{background:var(--deep);color:var(--pale)}.found{background:var(--mid2);color:#fff}.done{background:rgba(27,53,84,.12);color:var(--deep)}
+.meta{font-size:13px;color:var(--sub)}.ph{width:100%;max-height:220px;object-fit:cover;border-radius:14px;margin-top:10px}
+.top{display:flex;gap:12px}.em{width:48px;height:48px;display:grid;place-items:center;background:rgba(255,255,255,.7);border-radius:16px;font-size:26px;flex:none}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.rg{width:56px;height:56px;flex:none}.rg circle:nth-child(2){animation:ring .9s ease-out}@keyframes ring{from{stroke-dasharray:0 138.2}}
+.parts{font-size:12px;color:var(--sub)}.bar{height:10px;background:linear-gradient(90deg,var(--mid),var(--deep));border-radius:5px;width:0;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.br{display:grid;grid-template-columns:110px 1fr 28px;gap:8px;align-items:center;font-size:14px;margin:7px 0}
+.big{font:800 34px Sora,Inter,sans-serif;color:var(--deep)}.lm{display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}.lm b{font:800 18px Sora,sans-serif;color:var(--deep);width:34px}.lm small{display:block;color:var(--sub);font-size:12px}.dim{color:var(--sub);font-size:14px}
+#modal{position:fixed;inset:0;background:rgba(0,15,34,.55);display:none;align-items:flex-end;justify-content:center;z-index:9;padding:12px}
+#modal.on{display:flex}#mb{background:#eef4fe;border:1px solid var(--line);border-radius:26px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:20px;animation:up .3s ease-out}
+.warn{background:rgba(255,255,255,.65);border-left:4px solid var(--mid2);padding:10px 12px;border-radius:10px;font-size:14px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(90px + env(safe-area-inset-bottom,0px));background:var(--black);color:#fff;padding:10px 18px;border-radius:999px;display:none;z-index:10}
+h2{font:800 22px Sora,Inter,sans-serif;letter-spacing:-.01em;margin:2px 0 12px;color:var(--deep)}ul{padding-left:20px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<header class="hero"><svg class="orn" viewBox="0 0 400 400" aria-hidden="true"><g id="h"><path d="M190 300C120 300 60 250 60 180C60 110 120 70 175 85C225 98 235 160 195 178C165 191 140 168 152 146"/><path d="M190 266C140 266 102 232 102 186C102 142 140 114 172 124"/></g><use href="#h" transform="translate(400 0) scale(-1 1)"/><path class="d" d="M200 292l12 15-12 15-12-15z"/></svg>
+<div class="hi"><h1>Qayda</h1>
+<p class="lead">Find what you lost. Return what you found.<small>Қайда? Where is it? · Campus Lost &amp; Found</small></p>
+<div class="srch"><input id="hq" type="search" placeholder="Lost your keys? Search here…" aria-label="Search" autocomplete="off"></div>
+<div class="qa"><button class="btn" data-pk="lost">I lost something</button><button class="btn o" data-pk="found">I found something</button></div></div></header>
+<div class="band"></div>
+<main id="app"></main>
+<nav id="nav" aria-label="Main"></nav>
+<div id="modal"><div id="mb"></div></div><div id="toast" role="status"></div>
+<script>
+const CATS={Keys:'🔑',Phone:'📱',Wallet:'👛',Earbuds:'🎧','ID card':'🪪',Laptop:'💻',Clothes:'🧥',Other:'🎒'};
+const LOCS=['Library','Canteen','Classrooms','Coworking','Dorm','Gym','Cloakroom','Bus stop'];
+const KEY='qayda.v2',H=36e5,D90=90*24*H;
+let S,V='feed',PK='lost',PH=null,F={kind:'',cat:'',q:''};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function seed(){const n=Date.now();return [
+['lost','Wallet','Canteen','Black leather wallet','Student card inside, plain black',20,'',0],
+['found','Wallet','Canteen','Black wallet found','Next to a table, leather, black',18,'a blue card inside',0],
+['lost','Keys','Library','Bunch of three keys','Red keychain, three keys',50,'',30],
+['found','Keys','Library','Keys with red keychain','Three keys, red keychain',48,'bear picture on the keychain',30],
+['lost','Earbuds','Classrooms','White wireless earbuds','White case, left earbud scratched',70,'',0],
+['found','Phone','Coworking','Phone with blue case','Screen intact, blue case',22,'crack in the screen protector',0],
+['lost','Phone','Coworking','Blue-cased phone','Blue case, flower lock screen',40,'',0],
+['found','ID card','Cloakroom','Student ID card','Found near the cloakroom',96,'name starts with A',0],
+['lost','Laptop','Dorm','Grey laptop charger','Grey, long cable',120,'',0],
+['found','Clothes','Gym','Black hoodie','Left in the gym, size M',60,'white print on the chest',0],
+['lost','Clothes','Gym','Black hoodie','Forgot it in the gym, white print',58,'',0],
+['found','Other','Bus stop','Blue thermos','Left at the bus stop',30,'scratch on the lid',0]
+].map((a,i)=>{const t=n-a[5]*H;return{id:'d'+i,kind:a[0],cat:a[1],loc:a[2],title:a[3],desc:a[4],t,secret:a[6],by:'Demo',demo:1,msgs:0,done:a[7]?t+a[7]*H:0}})}
+function load(){try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}if(!S||!S.posts)S={posts:seed(),me:''};S.posts=S.posts.filter(p=>Date.now()-p.t<D90)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('Storage is full. Use a smaller photo.')}}
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.k);toast.k=setTimeout(()=>t.style.display='none',2600)}
+function ago(t){const h=(Date.now()-t)/H;return h<1?'just now':h<24?Math.round(h)+' h ago':Math.round(h/24)+' d ago'}
+const tri=s=>{s=' '+String(s).toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ')+' ';const r=new Set();for(let i=0;i<s.length-2;i++)r.add(s.slice(i,i+3));return r};
+const dice=(a,b)=>{a=tri(a);b=tri(b);if(!a.size||!b.size)return 0;let n=0;a.forEach(x=>b.has(x)&&n++);return 2*n/(a.size+b.size)};
+function ham(a,b){let d=0;for(let i=0;i<64;i++)if(a[i]!==b[i])d++;return d}
+function score(a,b){const c=a.cat===b.cat?30:0,l=a.loc===b.loc?20:0,d=Math.abs(a.t-b.t)/(24*H),tm=d<=1?15:d<=3?10:d<=7?5:0;
+const tx=Math.round(20*Math.min(1,dice(a.title+' '+a.desc,b.title+' '+b.desc)*1.5));
+const im=a.hash&&b.hash?Math.round(15*Math.max(0,1-ham(a.hash,b.hash)/24)):0;return{total:c+l+tm+tx+im,c,l,tm,tx,im}}
+function matches(p){return S.posts.filter(q=>q.kind!==p.kind&&!q.done&&!p.done).map(q=>({q,s:score(p,q)})).filter(m=>m.s.total>=30).sort((x,y)=>y.s.total-x.s.total).slice(0,3)}
+function readPhoto(f){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{
+const k=Math.min(1,320/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+const h=document.createElement('canvas');h.width=9;h.height=8;const x=h.getContext('2d');x.drawImage(im,0,0,9,8);const d=x.getImageData(0,0,9,8).data;
+const g=(y,i)=>{const o=(y*9+i)*4;return .3*d[o]+.59*d[o+1]+.11*d[o+2]};let b='';for(let y=0;y<8;y++)for(let i=0;i<8;i++)b+=g(y,i)>g(y,i+1)?'1':'0';
+res({url:c.toDataURL('image/jpeg',.6),hash:b})};im.src=r.result};r.readAsDataURL(f)})}
+const ring=n=>`<svg class="rg" viewBox="0 0 52 52" role="img" aria-label="${n} points"><circle cx="26" cy="26" r="22" fill="none" stroke="rgba(27,53,84,.18)" stroke-width="4"/><circle cx="26" cy="26" r="22" fill="none" stroke="#1b3554" stroke-width="4" stroke-linecap="round" transform="rotate(-90 26 26)" style="stroke-dasharray:${n*1.382} 138.2"/><text x="26" y="31" text-anchor="middle" fill="#0b2140" font-size="15" font-weight="800" font-family="Inter,sans-serif">${n}</text></svg>`;
+function nav(){$('#nav').innerHTML=[['feed','Feed'],['add','+ Post'],['stats','Stats'],['about','About']].map(([k,n])=>`<button data-v="${k}" ${V===k?'aria-current="true"':''}>${n}</button>`).join('')}
+function postCard(p){const st=p.done?'<span class="badge done">Returned</span>':`<span class="badge ${p.kind}">${p.kind==='lost'?'Lost':'Found'}</span>`;
+return `<article class="card tilt"><div class="top"><div class="em">${CATS[p.cat]||'🎒'}</div><div style="flex:1">${st}<strong>${esc(p.title)}</strong>
+<div class="meta">${esc(p.cat)} · ${esc(p.loc)} · ${ago(p.t)}${p.demo?' · demo':''}</div></div></div>
+<p style="margin:8px 0 0">${esc(p.desc)}</p>${p.img?`<img class="ph" src="${p.img}" alt="${esc(p.title)}">`:''}
+<div class="acts">${p.done?'':`<button class="btn g" data-a="m" data-id="${p.id}">Matches</button>
+<button class="btn k" data-a="${p.kind==='found'?'claim':'msg'}" data-id="${p.id}">${p.kind==='found'?'This is mine':'I found it'}</button>
+<button class="btn g" data-a="done" data-id="${p.id}">Returned</button>`}</div></article>`}
+function feed(){const q=F.q.toLowerCase();
+const L=S.posts.filter(p=>(!F.kind||p.kind===F.kind)&&(!F.cat||p.cat===F.cat)&&(!q||(p.title+' '+p.desc+' '+p.loc+' '+p.cat).toLowerCase().includes(q))).sort((a,b)=>b.t-a.t);
+return `<div class="chips">${[['','All'],['lost','Lost'],['found','Found']].map(([k,n])=>`<button class="chip" data-f="kind" data-val="${k}" aria-pressed="${F.kind===k}">${n}</button>`).join('')}<span class="sep"></span>${Object.keys(CATS).map(c=>`<button class="chip" data-f="cat" data-val="${c}" aria-pressed="${F.cat===c}">${CATS[c]} ${c}</button>`).join('')}</div>
+${S.posts.some(p=>p.demo)?'<div class="warn" style="margin-bottom:12px">Some posts are demo data. Add a real post and Qayda shows matches instantly.</div>':''}
+${L.length?L.map(postCard).join(''):'<div class="card">Nothing found. Try another keyword or category, or tap + Post to add an item.</div>'}`}
+function add(){return `<div class="card"><h2>New post</h2>
+<div class="row" role="group" aria-label="Type"><button class="btn" id="kl">I lost something</button><button class="btn g" id="kf">I found something</button></div>
+<label for="t">Item</label><input id="t" maxlength="60" placeholder="e.g. black leather wallet">
+<div class="row"><div><label for="c">Category</label><select id="c">${Object.keys(CATS).map(c=>`<option>${c}</option>`).join('')}</select></div>
+<div><label for="l">Where</label><select id="l">${LOCS.map(c=>`<option>${c}</option>`).join('')}</select></div></div>
+<label for="d">Details (colour, marks)</label><textarea id="d" rows="3" maxlength="240"></textarea>
+<div id="sw" style="display:none"><label for="s">Secret detail: only the owner knows it, never shown</label><input id="s" maxlength="80" placeholder="e.g. scratch on the lid"></div>
+<label for="p">Photo (optional)</label><input id="p" type="file" accept="image/*">
+<div class="warn" style="margin-top:12px">Keep ID numbers, card data and faces out of photos. Never post a phone number.</div>
+<label for="n">Your name</label><input id="n" maxlength="30" value="${esc(S.me)}">
+<div class="acts"><button class="btn" id="go">Publish</button></div></div>
+<div class="card"><h2 style="font-size:17px">Live matches</h2><div id="lv" class="dim"></div></div>`}
+function stats(){const P=S.posts,n=P.length,d=P.filter(p=>p.done),r=n?Math.round(100*d.length/n):0,hrs=d.length?Math.round(d.reduce((a,p)=>a+(p.done-p.t),0)/d.length/H):0;
+const bars=k=>{const m={};P.forEach(p=>m[p[k]]=(m[p[k]]||0)+1);const mx=Math.max(1,...Object.values(m));
+return Object.entries(m).sort((a,b)=>b[1]-a[1]).map(([a,b])=>`<div class="br"><span>${esc(a)}</span><div class="bar" data-w="${100*b/mx}"></div><span>${b}</span></div>`).join('')};
+return `<div class="card"><h2>Admin overview</h2><div class="row"><div><div class="big cnt" data-n="${n}">0</div><div class="meta">posts</div></div>
+<div><div class="big cnt" data-n="${r}" data-s="%">0</div><div class="meta">returned</div></div><div><div class="big cnt" data-n="${hrs}" data-s=" h">0</div><div class="meta">avg. return time</div></div></div>
+${P.some(p=>p.demo)?'<p class="meta">Current numbers are demo data, not research results.</p>':''}</div>
+<div class="card"><h2>Where things get lost</h2>${bars('loc')}</div><div class="card"><h2>What gets lost</h2>${bars('cat')}</div>
+<div class="acts"><button class="btn g" data-a="reset">Restore demo data</button><button class="btn g" data-a="clear">Delete all posts</button></div>`}
+function about(){return `<div class="card"><h2>How Qayda works</h2><ul>
+<li>People post what they lost or found: category, place, time, details, photo.</li>
+<li>Qayda compares opposite posts on 100 points: category 30, place 20, time 15, text 20, photo 15. Every score is explained.</li>
+<li>To claim a found item, the owner must name a secret detail. Phone numbers are never shown.</li>
+<li>Posts delete themselves after 90 days.</li></ul></div>
+<div class="card"><h2>Prototype limits</h2><ul>
+<li>Data lives in this browser only. A shared database is the next step.</li>
+<li>No university email login yet: only a name is asked.</li>
+<li>Photo similarity is a simple 64-bit difference hash (pHash family). It struggles with different angles and light.</li>
+<li>The places list is a sample and will be replaced with real campus locations.</li></ul></div>`}
+function render(enter){nav();document.body.classList.toggle('mini',V!=='feed');const m=$('#app');m.innerHTML=({feed,add,stats,about})[V]();
+m.classList.remove('enter');if(enter){void m.offsetWidth;m.classList.add('enter')}
+if(V==='add')bindAdd();
+if(V==='stats'){$$('.cnt').forEach(count);requestAnimationFrame(()=>requestAnimationFrame(()=>$$('.bar').forEach(b=>b.style.width=b.dataset.w+'%')))}}
+function count(el){const n=+el.dataset.n,s=el.dataset.s||'',t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/800);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(t0)}
+const go=v=>{V=v;render(true);scrollTo(0,0)};
+function live(){const k=$('#kf').className.includes('g')?'lost':'found';
+const q={kind:k,cat:$('#c').value,loc:$('#l').value,title:$('#t').value,desc:$('#d').value,t:Date.now(),hash:PH&&PH.hash};
+const M=q.title.trim()||q.desc.trim()?matches(q):[];
+$('#lv').innerHTML=M.length?M.map(({q,s})=>`<div class="lm"><b>${s.total}</b><span>${esc(q.title)}<small>${q.kind==='lost'?'Lost':'Found'} · ${esc(q.loc)} · ${ago(q.t)}</small></span></div>`).join(''):'Start typing. Possible matches appear here instantly.'}
+function bindAdd(){PH=null;const set=k=>{$('#kl').className='btn'+(k==='lost'?'':' g');$('#kf').className='btn'+(k==='found'?'':' g');$('#sw').style.display=k==='found'?'block':'none';live()};
+$('#kl').onclick=()=>set('lost');$('#kf').onclick=()=>set('found');set(PK);
+$('#app').oninput=$('#app').onchange=e=>{if(e.target.id==='p')return;live()};
+$('#p').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{PH=await readPhoto(f);toast('Photo added');live()}catch(x){toast('Could not read the photo')}};
+$('#go').onclick=()=>{const kind=$('#kf').className.includes('g')?'lost':'found',t=$('#t').value.trim();if(!t)return toast('Add the item name');
+if(kind==='found'&&!$('#s').value.trim())return toast('Add a secret detail so the owner can prove it');
+const p={id:'p'+Date.now(),kind,cat:$('#c').value,loc:$('#l').value,title:t,desc:$('#d').value.trim(),t:Date.now(),secret:$('#s').value.trim(),by:$('#n').value.trim()||'Student',msgs:0,done:0};
+if(PH){p.img=PH.url;p.hash=PH.hash}S.me=p.by;S.posts.push(p);save();PH=null;V='feed';render(true);scrollTo(0,0);showMatches(p,true)}}
+function showMatches(p,fresh){const M=matches(p);
+$('#mb').innerHTML=`<h2>${fresh?'Published. ':''}Possible matches</h2>${M.length?M.map(({q,s})=>`<div class="card" style="background:rgba(255,255,255,.55)"><div class="top">${ring(s.total)}
+<div style="flex:1"><strong>${esc(q.title)}</strong><div class="meta">${q.kind==='lost'?'Lost':'Found'} · ${esc(q.loc)} · ${ago(q.t)}</div>
+<div class="parts">Category ${s.c}/30 · Place ${s.l}/20 · Time ${s.tm}/15 · Text ${s.tx}/20 · Photo ${s.im}/15</div></div></div></div>`).join(''):'<p>No matches yet. Check again when new posts arrive.</p>'}
+<div class="acts"><button class="btn" data-a="close">Close</button></div>`;$('#modal').classList.add('on')}
+function claim(p){$('#mb').innerHTML=`<h2>Is this yours?</h2><p>The finder added a secret detail. Describe it to prove the item is yours.</p>
+<label for="cs">Secret detail</label><input id="cs" maxlength="80"><div id="cr" style="margin-top:12px"></div>
+<div class="acts"><button class="btn" id="cb">Check</button><button class="btn g" data-a="close">Close</button></div>`;$('#modal').classList.add('on');
+$('#cb').onclick=()=>{$('#cr').innerHTML=dice($('#cs').value,p.secret)>=.35?`<div class="warn"><strong>Match.</strong> Finder: ${esc(p.by)}. Meet on campus in a busy place. Never pay for an item.</div>`:'<div class="warn" style="border-color:#a3402f">No match. Try describing it more precisely.</div>'}}
+function msg(p){$('#mb').innerHTML=`<h2>I found it</h2><p>The owner gets your message. Your phone number stays hidden.</p>
+<label for="mm">Message</label><textarea id="mm" rows="3" maxlength="200">I found your item. Let’s meet on campus.</textarea>
+<div class="acts"><button class="btn" id="mg">Send</button><button class="btn g" data-a="close">Close</button></div>`;$('#modal').classList.add('on');
+$('#mg').onclick=()=>{p.msgs=(p.msgs||0)+1;save();$('#modal').classList.remove('on');toast('Message sent')}}
+document.addEventListener('click',e=>{const b=e.target.closest('button,#modal');if(!b)return;
+if(b.id==='modal'){if(e.target===b)b.classList.remove('on');return}
+if(b.dataset.f){const k=b.dataset.f,v=b.dataset.val;F[k]=(k==='cat'&&F[k]===v)?'':v;render();return}
+if(b.dataset.pk){PK=b.dataset.pk;go('add');return}
+if(b.dataset.v){go(b.dataset.v);return}
+const a=b.dataset.a;if(!a)return;const p=S.posts.find(x=>x.id===b.dataset.id);
+if(a==='close')$('#modal').classList.remove('on');
+else if(a==='m'&&p)showMatches(p);else if(a==='claim'&&p)claim(p);else if(a==='msg'&&p)msg(p);
+else if(a==='done'&&p){p.done=Date.now();save();render();toast('Marked as returned')}
+else if(a==='reset'){S.posts=seed();save();render()}else if(a==='clear'){S.posts=[];save();render()}});
+$('#app').addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const c=e.target.closest('.tilt');if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateX(${-y*5}deg) rotateY(${x*5}deg)`});
+$('#app').addEventListener('pointerout',e=>{const c=e.target.closest('.tilt');if(c&&!c.contains(e.relatedTarget))c.style.transform=''});
+$('.hero').addEventListener('click',e=>{if(e.target.closest('button,input'))return;const r=document.createElement('span'),b=e.currentTarget.getBoundingClientRect();r.className='rip';r.style.left=e.clientX-b.left+'px';r.style.top=e.clientY-b.top+'px';e.currentTarget.appendChild(r);setTimeout(()=>r.remove(),1000)});
+const orn=$('.orn');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)addEventListener('pointermove',e=>{orn.style.transform=`translate(${(e.clientX/innerWidth-.5)*20}px,${(e.clientY/innerHeight-.5)*20}px)`});
+$('#hq').addEventListener('input',e=>{F.q=e.target.value;V='feed';render()});
+const PL=['keys','wallet','phone','earbuds','student ID'];let pi=0;setInterval(()=>{const h=$('#hq');if(!h.value&&document.activeElement!==h)h.placeholder='Lost your '+PL[pi=(pi+1)%PL.length]+'? Search here…'},2400);
+load();render();
+</script>
+</body>
+</html>
