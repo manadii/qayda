@@ -137,19 +137,26 @@ res({url:c.toDataURL('image/jpeg',.6),hash:b})};im.src=r.result};r.readAsDataURL
 const ring=n=>`<svg class="rg" viewBox="0 0 52 52" role="img" aria-label="${n} points"><circle cx="26" cy="26" r="22" fill="none" stroke="rgba(27,53,84,.18)" stroke-width="4"/><circle cx="26" cy="26" r="22" fill="none" stroke="#1b3554" stroke-width="4" stroke-linecap="round" transform="rotate(-90 26 26)" style="stroke-dasharray:${n*1.382} 138.2"/><text x="26" y="31" text-anchor="middle" fill="#0b2140" font-size="15" font-weight="800" font-family="Inter,sans-serif">${n}</text></svg>`;
 
 function showAuth(step,email){step=step||'email';email=email||'';const a=$('#auth');a.classList.add('on');
-a.innerHTML=`<div class="card ac"><div class="lgo">${LOGO}</div><h2>Sign in to <i class="em2">Qayda</i></h2>`+(step==='email'?
-`<p class="dim">Use your AITU email. We email you a sign-in link, no password needed.</p><label for="ae">AITU email</label><input id="ae" type="email" placeholder="name${DOM}" autocomplete="email" value="${esc(email)}"><div class="acts"><button class="btn" id="as">Send code</button></div>`:
-`<p class="dim">We sent an email to <b>${esc(email)}</b>. Open the sign-in link in it, or type the code if the email shows one. Check Spam too.</p><label for="ac">Code (only if the email has one)</label><input id="ac" inputmode="numeric" maxlength="8" autocomplete="one-time-code"><div class="acts"><button class="btn" id="av">Verify</button><button class="btn g" id="ab">Back</button></div>`)+
+const body=step==='email'?
+`<p class="dim">Use your AITU email. We email you a sign-in link, no password needed.</p><label for="ae">AITU email</label><input id="ae" type="email" placeholder="name${DOM}" autocomplete="email" value="${esc(email)}"><div class="acts"><button class="btn" id="as">Email me a sign-in link</button><button class="btn g" id="ap">Use a password</button></div>`:
+step==='pass'?
+`<p class="dim">Password sign-in is for the jury demo account and the project team.</p><label for="ae">Email</label><input id="ae" type="email" placeholder="name${DOM}" autocomplete="username" value="${esc(email)}"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"><div class="acts"><button class="btn" id="apv">Sign in</button><button class="btn g" id="ab">Back</button></div>`:
+`<p class="dim">We sent an email to <b>${esc(email)}</b>. Open the sign-in link in it, or type the code if the email shows one. Check Spam too.</p><label for="ac">Code (only if the email has one)</label><input id="ac" inputmode="numeric" maxlength="8" autocomplete="one-time-code"><div class="acts"><button class="btn" id="av">Verify</button><button class="btn g" id="ab">Back</button></div>`;
+a.innerHTML=`<div class="card ac"><div class="lgo">${LOGO}</div><h2>Sign in to <i class="em2">Qayda</i></h2>`+body+
 `<p class="meta" id="am" role="alert"></p><p class="meta">Only ${DOM} accounts can join. We store your email and your posts.</p></div>`;
 const say=t=>$('#am').textContent=t,on=(id,fn)=>{const e=$(id);if(e)e.onclick=fn};
 const key=(id,bt)=>{const e=$(id);if(e)e.onkeydown=ev=>{if(ev.key==='Enter')$(bt).click()}};
-key('#ae','#as');key('#ac','#av');
+key('#ae','#as');key('#ac','#av');key('#pw','#apv');
 on('#as',async()=>{const em=$('#ae').value.trim().toLowerCase();if(!em.endsWith(DOM))return say('Please use your '+DOM+' email.');
 $('#as').disabled=true;say('Sending…');const r=await sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:true,emailRedirectTo:location.origin+location.pathname}});
 if(r.error){$('#as').disabled=false;return say(r.error.message)}showAuth('code',em)});
-on('#ab',()=>showAuth('email',email));
+on('#ap',()=>showAuth('pass',$('#ae').value.trim()));
+on('#apv',async()=>{const em=$('#ae').value.trim().toLowerCase(),pw=$('#pw').value;if(!em||!pw)return say('Enter your email and password.');
+say('Signing in…');const r=await sb.auth.signInWithPassword({email:em,password:pw});if(r.error)say(r.error.message)});
+on('#ab',()=>showAuth('email',($('#ae')||{}).value||email));
 on('#av',async()=>{const c=$('#ac').value.trim();if(!c)return say('Open the link in your email, or enter the code.');say('Checking…');
 const r=await sb.auth.verifyOtp({email,token:c,type:'email'});if(r.error)say(r.error.message)})}
+
 async function loadAll(){const a=await sb.from('posts').select('*').gt('created_at',new Date(Date.now()-D90).toISOString()).order('created_at',{ascending:false});
 if(a.error)return toast(a.error.message);
 S.posts=a.data.map(r=>({id:r.id,owner:r.owner,kind:r.kind,cat:r.cat,loc:r.loc,title:r.title,desc:r.details||'',t:+new Date(r.created_at),by:r.by_name||'Student',demo:r.demo,img:r.img,hash:r.hash,done:r.done_at?+new Date(r.done_at):0}));
